@@ -3,18 +3,22 @@ let form = document.getElementById('libform');
 form.addEventListener('submit', handleForm);
 form.addEventListener('submit', submit);
 
+let myLibrary = [];
+function init () {
+    if(localStorage.getItem('mylibrary') === ""){
+        localStorage.setItem('mylibrary', JSON.stringify(myLibrary));
+    }
+    myLibrary = JSON.parse(localStorage.getItem('mylibrary'));
+}
+
 // document.querySelector('#libform').addEventListener('submit', submit);
 
 function handleForm(event) {  event.preventDefault();  } // prevents page reloads on submit
 
-let myLibrary = [
-    { 
-        title: "Hobbit", 
-        author: "Tolkein", 
-        pages: 234, 
-        status: "Read"
-    }
-];
+function storeLib(arr) {
+    localStorage.setItem('mylibrary', JSON.stringify(myLibrary));
+}
+
 
 function Book(title, author, pages, status) { // Book constructor to use if necessary
     this.title = title;
@@ -24,6 +28,8 @@ function Book(title, author, pages, status) { // Book constructor to use if nece
 }
 
 function populate() { // initial population of display with myLibrary data
+    init();
+    // myLibrary = localStorage.getItem('mylibrary');
     for(let i = 0; i < myLibrary.length; i++){
         let table = document.getElementById('table');
         let newRow = table.insertRow(table.length);
@@ -60,7 +66,17 @@ function addBook (newBook) { // adds a new book with the user's form input to th
 function remove(event) { // removes the targeted row on the library table
     let td = event.target.parentNode;
     let tr = td.parentNode;
+    let el = td.id;
+    console.log(el);
     td.parentNode.removeChild(td);
+    for(let i = 0; i < myLibrary.length; i++){
+        if (myLibrary[i].title == el) {
+            console.log("Yes");
+            myLibrary.splice(i, i+1);
+        }
+    }
+    console.log(myLibrary);
+    storeLib(myLibrary);
 }
 
 function change(event) { // switches status of book in table and myLibrary array to either "Read" or "Unread" depending on what it currently is
@@ -79,6 +95,7 @@ function change(event) { // switches status of book in table and myLibrary array
             } 
         }
     }
+    storeLib(myLibrary);
 }
 
 
@@ -89,7 +106,7 @@ function submit() { // takes user form input, creates a book with it, stores the
     let stat = document.querySelector('#libform select');
     let value = stat.options[stat.selectedIndex].value;
     newBook.status = value;
-
+    console.log(newBook, myLibrary);
     addBook(newBook);
 
     let table = document.getElementById('table');
@@ -119,6 +136,7 @@ function submit() { // takes user form input, creates a book with it, stores the
 
     setActions();
     form.reset();
+    storeLib(myLibrary);
 }
 
 
