@@ -12,15 +12,6 @@ function handleForm(event) {  event.preventDefault();  }
 
 let myLibrary = [];
 
-// function disp() {
-//     if(myLibrary !== null){
-//         for(let i = 0; i < myLibrary.length; i++){
-//             submit(myLibrary[i]);
-//         }
-//     }
-    
-// }
-
 function Book(title, author, pages, status) {
     this.title = title;
     this.author = author;
@@ -28,8 +19,7 @@ function Book(title, author, pages, status) {
     this.status = status;
 }
 
-function addBook () { // adds a new book with the user's form input to the myLibrary array
-    let newBook = Array.from(document.querySelectorAll('#libform input')).reduce((acc, input) => ({ ...acc, [input.id]: input.value }), {});
+function addBook (newBook) { // adds a new book with the user's form input to the myLibrary array
     myLibrary.push(newBook);
 }
 
@@ -48,12 +38,13 @@ function remove(event) { // removes the targeted row on the library table
 
 
 function submit() { // takes user form input, creates a book with it, stores the book in the myLibrary array, and adds it to the displayed table
-
-    addBook();
-
-    let newBook = Array.from(document.querySelectorAll('#libform input')).reduce((acc, input) => ({ ...acc, [input.id]: input.value }), {});
-
     let form = document.getElementById('libform');
+    let newBook = Array.from(document.querySelectorAll('#libform input')).reduce((acc, input) => ({ ...acc, [input.id]: input.value }), {});
+    let stat = document.querySelector('#libform select');
+    let value = stat.options[stat.selectedIndex].value;
+    newBook.status = value;
+
+    addBook(newBook);
 
     let table = document.getElementById('table');
     let newRow = table.insertRow(table.length);
