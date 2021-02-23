@@ -118,14 +118,6 @@ input:focus {
     cursor: pointer;
 }
 
-
-
-/* .container {
-    width: 300px;
-    height:200px;
+#table .hold {
+    height:1px;
 }
-
-.container input {
-    width: 50%;
-    justify-self:right;
-} */
