@@ -1,24 +1,43 @@
-#libContainer {
-    background:cadetblue;
-    width:740px;
-    height:600px;
-    margin:auto;
-    vertical-align: middle;
-    transform: translateY(75px);
-    display:grid;
-}
-
 body {
     min-width:99vw;
     min-height:97vh;
     line-height:50%;
 }
 
+.title {
+    text-align:center;
+    font-weight:lighter;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.container {
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content:center;
+    border: 1px solid grey;
+}
+
+.disp {
+    display:flex;
+    padding:10px;
+    max-width:100%;
+    max-height:100%;
+    border: 2px solid green;
+    vertical-align: middle;
+}
+
+#bookForm {
+    margin-right:0%;
+    justify-content:center;
+    vertical-align: middle;;
+}
+
 #table {
-   min-width:50%;
-   min-height:20%;
-   border-collapse:collapse;
-   margin:auto;
+    min-width:75%;
+    border-collapse:collapse;
+    margin:auto;
+    margin-top:2%;
+    vertical-align:top;
 }
 
 #table th {
@@ -76,11 +95,14 @@ input:focus {
 
 #container {
     vertical-align:middle;
-    border: none;
-
+    border: none;    
 }
 
-
+#submit {
+    background:cadetblue;
+    border:none;
+    color:ivory;
+}
 
 
 /* .container {
