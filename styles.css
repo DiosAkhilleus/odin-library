@@ -56,6 +56,7 @@ body {
     border: 1px solid lightgray;
     padding:4px 8px;
     height:50px;
+    user-select:none;
 }
 
 #table tr:nth-child(odd) td {
@@ -110,13 +111,16 @@ input:focus {
     border: none;    
 }
 
-.remove {
+.remove, .switch {
     text-decoration:underline;
+    user-select:none;
 }
 
-.remove:hover {
+.remove:hover, .switch:hover {
     cursor: pointer;
 }
+
+
 
 #table .hold {
     height:1px;
