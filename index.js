@@ -3,15 +3,16 @@ let form = document.getElementById('libform');
 form.addEventListener('submit', handleForm);
 form.addEventListener('submit', submit);
 
-let myLibrary = [{
+let myLibrary = [{ // initial library state
     title: "Example Book",
     author: "Joe Montana",
     pages: 350,
     status: "Read"
 }];
-function init () {
+
+function init () { // sets local 
     let strLib = JSON.stringify(myLibrary);
-    if(localStorage.getItem('mylibrary') !== strLib){
+    if(!localStorage.getItem('mylibrary')){
         localStorage.setItem('mylibrary', strLib);
         console.log("works");
     }
