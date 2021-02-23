@@ -3,10 +3,17 @@ let form = document.getElementById('libform');
 form.addEventListener('submit', handleForm);
 form.addEventListener('submit', submit);
 
-let myLibrary = [];
+let myLibrary = [{
+    title: "Example Book",
+    author: "Joe Montana",
+    pages: 350,
+    status: "Read"
+}];
 function init () {
-    if(localStorage.getItem('mylibrary') === ""){
-        localStorage.setItem('mylibrary', JSON.stringify(myLibrary));
+    let strLib = JSON.stringify(myLibrary);
+    if(localStorage.getItem('mylibrary') !== strLib){
+        localStorage.setItem('mylibrary', strLib);
+        console.log("works");
     }
     myLibrary = JSON.parse(localStorage.getItem('mylibrary'));
 }
