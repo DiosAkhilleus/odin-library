@@ -7,13 +7,50 @@ form.addEventListener('submit', submit);
 
 function handleForm(event) {  event.preventDefault();  } // prevents page reloads on submit
 
-let myLibrary = [];
+let myLibrary = [
+    { 
+        title: "Hobbit", 
+        author: "Tolkein", 
+        pages: 234, 
+        status: "Read"
+    }
+];
 
 function Book(title, author, pages, status) { // Book constructor to use if necessary
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.status = status;
+}
+
+function populate() { // initial population of display with myLibrary data
+    for(let i = 0; i < myLibrary.length; i++){
+        let table = document.getElementById('table');
+        let newRow = table.insertRow(table.length);
+        newRow.setAttribute('id', `${myLibrary[i].title}`);
+        let t = newRow.insertCell(0);
+        let a = newRow.insertCell(1);
+        let p = newRow.insertCell(2);
+        let s = newRow.insertCell(3);
+        let change = newRow.insertCell(4);
+        let del = newRow.insertCell(5);
+        s.setAttribute('id', Math.random());
+        del.setAttribute('class', 'remove');
+        change.setAttribute('class', 'switch');
+
+        let title = myLibrary[i].title;
+        let author = myLibrary[i].author;
+        let pages = myLibrary[i].pages;
+        let status = myLibrary[i].status;
+
+        t.innerHTML = `${title}`;
+        a.innerHTML = `${author}`;
+        p.innerHTML = `${pages}`;
+        s.innerHTML = `${status}`;
+        change.innerHTML = 'Switch';
+        del.innerHTML = 'Remove';
+        setActions();
+    }
 }
 
 function addBook (newBook) { // adds a new book with the user's form input to the myLibrary array
